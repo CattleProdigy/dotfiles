@@ -1,0 +1,2 @@
+bind main R !git rebase -i --autosquash %(commit)^
+bind diff R !git rebase -i --autosquash %(commit)^
