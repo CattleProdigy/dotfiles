@@ -9,32 +9,32 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'rust-lang/rust.vim'
+  Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+  Plug 'Valloric/YouCompleteMe'
 
   "Plug 'https://github.com/tpope/vim-commentary'
-  "Plug 'https://github.com/ctrlpvim/ctrlp.vim'
   "Plug 'https://github.com/rhysd/vim-clang-format'
-  "Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 " Fmt on save
 let g:rustfmt_autosave = 1
 
 " "Don't ask about YCM Conf
-" let g:ycm_confirm_extra_conf = 0
-" 
+let g:ycm_confirm_extra_conf = 0
+"
 " " Disable YCM diags, they don't work and I use neomake instead
 " let g:ycm_enable_diagnostic_highlighting = 0
 " let g:ycm_show_diagnostics_ui = 0
 " let g:ycm_enable_diagnostic_signs = 0
 " 
 " " Hide the scratch buffer
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 " 
 " let g:ycm_use_clangd = 0
 " 
-" "" YCM Jump
-" nnoremap <leader>jd :YcmCompleter GoTo<CR>
+" YCM Jump
+ nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 " Tabline
 let g:airline#extensions#tabline#enabled = 1
