@@ -2,7 +2,11 @@
 filetype plugin indent on    " required
 
 " Trim trailing whitespace on save
-autocmd BufWritePre *.{java,cpp,c,h,hpp,cu,md} :%s/\s\+$//e
+autocmd BufWritePre *.{java,cpp,c,h,hpp,cu,md,toml} :%s/\s\+$//e
+
+" Enter/Exit insert mode automatically when switching to a terminal buffer
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -11,28 +15,28 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'rust-lang/rust.vim'
   Plug 'https://github.com/ctrlpvim/ctrlp.vim'
   Plug 'Valloric/YouCompleteMe'
+  Plug 'https://github.com/rhysd/vim-clang-format'
 
   "Plug 'https://github.com/tpope/vim-commentary'
-  "Plug 'https://github.com/rhysd/vim-clang-format'
 call plug#end()
 
 " Fmt on save
 let g:rustfmt_autosave = 1
 
-" "Don't ask about YCM Conf
+"Don't ask about YCM Conf
 let g:ycm_confirm_extra_conf = 0
-"
-" " Disable YCM diags, they don't work and I use neomake instead
+
 " let g:ycm_enable_diagnostic_highlighting = 0
 " let g:ycm_show_diagnostics_ui = 0
 " let g:ycm_enable_diagnostic_signs = 0
-" 
+
 " " Hide the scratch buffer
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-" 
+
+"
 " let g:ycm_use_clangd = 0
-" 
+"
 " YCM Jump
  nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
@@ -88,7 +92,8 @@ command Wq wq
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor\ --cpp\ --ignore\ tags
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_custom_ignore = 'target\|proptest_regressions'
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -122,7 +127,7 @@ if exists("+undofile")
 endif
 
 " Clang Format
-let g:clang_format#command = 'oe-clang-format'
+let g:clang_format#command = 'clang-format'
 autocmd FileType c,cpp,objc,cu nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc,cu vnoremap <buffer><Leader>cf :ClangFormat<CR>
 

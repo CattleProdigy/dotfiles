@@ -129,3 +129,9 @@ if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
 fi
 
 export EDITOR='nvim'
+source "$HOME/.cargo/env"
+
+export PATH=$PATH:/home/paul/.local/bin
+
+# custom aliases
+alias rgrep='rgrep -ri --exclude-dir=target'
